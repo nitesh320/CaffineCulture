@@ -760,6 +760,22 @@ object-fit:cover;
 z-index:-2;
 filter:brightness(.45);
 }
+
+        #preloader{
+position:fixed;
+inset:0;
+background:#000;
+z-index:99999;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.loader-logo{
+font-size:5rem;
+font-family:Playfair Display;
+color:white;
+}
     </style>
 </head>
 <body>
@@ -1404,6 +1420,19 @@ playsinline>
                 toast.classList.remove('show');
             }, 3000);
         }
+
+        window.addEventListener("load",()=>{
+
+gsap.to("#preloader",{
+opacity:0,
+duration:1,
+delay:1,
+onComplete:()=>{
+document.getElementById("preloader").remove();
+}
+})
+
+});
 
     </script>
 </body>
