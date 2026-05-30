@@ -750,6 +750,16 @@
             body { cursor: auto; }
             a, button, .menu-cat-btn { cursor: auto; }
         }
+        .hero-video{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-2;
+filter:brightness(.45);
+}
     </style>
 </head>
 <body>
@@ -760,7 +770,11 @@
 
     <!-- Toast Notification -->
     <div class="toast" id="toast">Request Received. We will contact you shortly.</div>
-
+<div id="preloader">
+    <div class="loader-logo">
+        C<span>&</span>C
+    </div>
+</div>
     <!-- Header -->
     <header id="header">
         <div class="container nav-inner">
@@ -783,9 +797,7 @@
     <!-- Hero Section -->
     <section id="hero">
         <!-- Simulated Video Background with High Quality Image/Animation -->
-        <video
-class="hero-video"
-autoplay
+        <video class="hero-video" autoplay
 muted
 loop
 playsinline>
