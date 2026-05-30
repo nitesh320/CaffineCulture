@@ -1,0 +1,1390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caffeine & Culture Cafe | Dubai Design District</title>
+    <meta name="description" content="Luxury specialty coffee experience in Dubai Design District. Crafted for creators, dreamers, and coffee lovers.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --bg-dark: #0B0B0B;
+            --bg-card: #111111;
+            --bg-card-hover: #1A1A1A;
+            --accent-gold: #D4A574;
+            --accent-gold-light: #E0B97F;
+            --accent-cream: #F7E7CE;
+            --text-white: #FFFFFF;
+            --text-gray: #BFBFBF;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            --font-luxury: 'Cormorant Garamond', serif;
+            
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --blur: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html.lenis {
+            height: auto;
+        }
+
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            cursor: none; /* Custom cursor */
+        }
+
+        a { text-decoration: none; color: inherit; cursor: none; }
+        ul { list-style: none; }
+        img { width: 100%; display: block; object-fit: cover; }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot,
+        .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-gold);
+        }
+
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--accent-gold);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        body:hover .cursor-outline.hovered {
+            width: 60px;
+            height: 60px;
+            background-color: rgba(212, 165, 116, 0.1);
+            border-color: transparent;
+            backdrop-filter: blur(2px);
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .luxury-text {
+            font-family: var(--font-luxury);
+            font-style: italic;
+            color: var(--accent-gold-light);
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .section-subtitle {
+            font-family: var(--font-luxury);
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* --- UI COMPONENTS --- */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.8rem;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            background: transparent;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gold);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: -1;
+        }
+
+        .btn:hover {
+            color: var(--bg-dark);
+        }
+
+        .btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .btn-primary {
+            background: var(--accent-gold);
+            color: var(--bg-dark);
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-gold-light);
+            border-color: var(--accent-gold-light);
+            color: var(--bg-dark);
+        }
+        
+        .btn-primary::before { display: none; }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--blur));
+            -webkit-backdrop-filter: blur(var(--blur));
+            border: 1px solid var(--glass-border);
+            padding: 2rem;
+            border-radius: 4px;
+        }
+
+        /* --- LAYOUT UTILS --- */
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section {
+            padding: 8rem 0;
+            position: relative;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 2rem 0;
+            transition: var(--transition-smooth);
+        }
+
+        header.scrolled {
+            padding: 1rem 0;
+            background: rgba(11, 11, 11, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-white);
+            letter-spacing: -0.02em;
+        }
+        
+        .logo span { color: var(--accent-gold); }
+
+        nav ul {
+            display: flex;
+            gap: 3rem;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-gray);
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--accent-gold); }
+
+        .mobile-toggle {
+            display: none;
+            color: var(--text-white);
+            font-size: 1.5rem;
+        }
+
+        /* --- HERO --- */
+        #hero {
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 0;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 120%; /* Extra for parallax */
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(0.4);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, var(--bg-dark) 90%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            margin-bottom: 1.5rem;
+            opacity: 0; /* Animated in */
+            transform: translateY(30px);
+        }
+
+        .hero-sub {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-gray);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Coffee Beans Canvas */
+        #beans-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* --- ABOUT --- */
+        #about .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .about-img {
+            height: 600px;
+            width: 100%;
+            object-fit: cover;
+            transform: scale(1.1);
+            transition: transform 1.5s ease;
+        }
+
+        .about-img:hover { transform: scale(1); }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-gray);
+            margin-bottom: 2rem;
+        }
+
+        /* --- SIGNATURE COFFEE --- */
+        #signature { background: var(--bg-card); }
+
+        .coffee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .coffee-card {
+            background: var(--bg-dark);
+            padding: 1.5rem;
+            border: 1px solid var(--glass-border);
+            transition: var(--transition-smooth);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            cursor: none;
+        }
+
+        .coffee-card:hover {
+            border-color: var(--accent-gold);
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .coffee-img-wrap {
+            height: 300px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .coffee-img-wrap img {
+            height: 100%;
+            transition: transform 0.8s ease;
+        }
+
+        .coffee-card:hover .coffee-img-wrap img {
+            transform: scale(1.1);
+        }
+
+        .coffee-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .coffee-info p {
+            font-family: var(--font-luxury);
+            color: var(--accent-gold-light);
+            font-style: italic;
+        }
+
+        /* --- MENU --- */
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-cat-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            cursor: none;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition-smooth);
+        }
+
+        .menu-cat-btn.active, .menu-cat-btn:hover {
+            color: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .menu-item-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .menu-item-details p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        .menu-price {
+            font-family: var(--font-luxury);
+            font-size: 1.3rem;
+            color: var(--accent-gold);
+        }
+
+        /* --- ROASTERY TIMELINE --- */
+        #roastery { background: var(--bg-card); }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--accent-gold), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6rem;
+            opacity: 0.3; /* Start dim */
+            transition: opacity 0.5s;
+        }
+
+        .timeline-item.active { opacity: 1; }
+
+        .timeline-content {
+            width: 45%;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            text-align: left;
+            order: 2;
+        }
+
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            background: var(--bg-dark);
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) scale(0.8);
+            transition: transform 0.3s;
+            z-index: 2;
+        }
+
+        .timeline-item.active .timeline-dot {
+            background: var(--accent-gold);
+            transform: translateX(-50%) scale(1.2);
+            box-shadow: 0 0 15px var(--accent-gold);
+        }
+
+        /* --- GALLERY --- */
+        .gallery-masonry {
+            column-count: 3;
+            column-gap: 1.5rem;
+        }
+
+        .gallery-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            cursor: none;
+        }
+
+        .gallery-item img {
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gallery-overlay i {
+            font-size: 2rem;
+            color: var(--text-white);
+        }
+
+        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+        /* --- TESTIMONIALS --- */
+        .testimonial-slider {
+            display: flex;
+            overflow-x: auto;
+            gap: 2rem;
+            padding: 2rem 0;
+            scrollbar-width: none;
+        }
+        
+        .testimonial-slider::-webkit-scrollbar { display: none; }
+
+        .test-card {
+            min-width: 400px;
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .stars { color: var(--accent-gold); margin-bottom: 1rem; }
+        .test-text { font-style: italic; margin-bottom: 1.5rem; color: var(--text-gray); line-height: 1.6; }
+        .test-author { font-family: var(--font-heading); font-weight: 600; }
+
+        /* --- LOCATION & RESERVATION --- */
+        #location { padding-bottom: 0; }
+        
+        .loc-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 600px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 100%;
+            filter: grayscale(1) invert(1) contrast(0.8);
+        }
+
+        .loc-info {
+            background: var(--bg-card);
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-item { margin-bottom: 2rem; }
+        .info-item h5 { color: var(--accent-gold); text-transform: uppercase; font-size: 0.9rem; margin-bottom: 0.5rem; }
+        .info-item p { font-size: 1.2rem; }
+
+        #reservation {
+            background: linear-gradient(rgba(11,11,11,0.9), rgba(11,11,11,0.9)), url('https://picsum.photos/seed/coffee-shop-dark/1920/1080');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .form-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border: 1px solid var(--glass-border);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+        
+        .form-control {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--text-gray);
+            padding: 1rem 0;
+            color: var(--text-white);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .form-row { display: flex; gap: 1rem; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: black;
+            padding: 5rem 0 2rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-logo { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 1rem; color: var(--text-white); }
+        .footer-desc { color: var(--text-gray); line-height: 1.6; }
+        .footer-col h4 { margin-bottom: 1.5rem; font-family: var(--font-luxury); color: var(--accent-gold); }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col ul li a { color: var(--text-gray); transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--text-white); padding-left: 5px; }
+
+        .newsletter-form { display: flex; border-bottom: 1px solid var(--glass-border); padding-bottom: 0.5rem; }
+        .newsletter-form input { background: transparent; border: none; color: white; flex: 1; }
+        .newsletter-form button { background: transparent; border: none; color: var(--accent-gold); cursor: none; }
+
+        .socials { display: flex; gap: 1rem; margin-top: 1.5rem; }
+        .socials a { width: 40px; height: 40px; border: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: center; border-radius: 50%; transition: 0.3s; }
+        .socials a:hover { background: var(--accent-gold); color: black; border-color: var(--accent-gold); }
+
+        .copyright {
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            padding-top: 2rem;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        /* --- TOAST --- */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-card);
+            border-left: 4px solid var(--accent-gold);
+            padding: 1rem 2rem;
+            color: var(--text-white);
+            transform: translateY(150%);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .toast.show { transform: translateY(0); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1024px) {
+            .about-grid, .loc-wrapper { grid-template-columns: 1fr; }
+            .about-img { height: 400px; }
+            .timeline::before { left: 20px; }
+            .timeline-content { width: 85%; margin-left: 50px; text-align: left !important; }
+            .timeline-dot { left: 20px; }
+            .timeline-item:nth-child(even) .timeline-content { order: 0; }
+            .gallery-masonry { column-count: 2; }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transform: translateX(100%);
+                transition: transform 0.4s ease;
+            }
+            
+            nav ul.active { transform: translateX(0); }
+            .mobile-toggle { display: block; z-index: 101; }
+            
+            .hero-title { font-size: 3rem; }
+            .hero-actions { flex-direction: column; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .gallery-masonry { column-count: 1; }
+            
+            .cursor-dot, .cursor-outline { display: none; } /* Hide custom cursor on touch */
+            body { cursor: auto; }
+            a, button, .menu-cat-btn { cursor: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Request Received. We will contact you shortly.</div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container nav-inner">
+            <a href="#" class="logo">C<span>&</span>C</a>
+            <nav>
+                <ul id="nav-links">
+                    <li><a href="#about" class="hover-trigger">Story</a></li>
+                    <li><a href="#signature" class="hover-trigger">Coffee</a></li>
+                    <li><a href="#menu" class="hover-trigger">Menu</a></li>
+                    <li><a href="#roastery" class="hover-trigger">Roastery</a></li>
+                    <li><a href="#location" class="hover-trigger">Visit</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle hover-trigger" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <!-- Simulated Video Background with High Quality Image/Animation -->
+        <img src="https://picsum.photos/seed/dark-coffee-cinematic/1920/1080" alt="Cinematic Coffee Background" class="hero-bg" id="parallax-bg">
+        <div class="hero-overlay"></div>
+        <canvas id="beans-canvas"></canvas>
+
+        <div class="hero-content">
+            <h1 class="hero-title reveal-text">Where Coffee Meets Culture</h1>
+            <p class="hero-sub reveal-text">A specialty coffee destination in the heart of Dubai Design District. Crafted for creators, dreamers, and coffee lovers.</p>
+            <div class="hero-actions reveal-text">
+                <a href="#reservation" class="btn btn-primary hover-trigger">Reserve a Table</a>
+                <a href="#menu" class="btn hover-trigger">Explore Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <span class="section-subtitle reveal-text">Our Story</span>
+            <h2 class="section-title reveal-text">More Than A Cafe</h2>
+            
+            <div class="about-grid">
+                <div class="about-img-wrapper reveal-img">
+                    <img src="https://picsum.photos/seed/interior-luxury-cafe/800/1000" alt="Cafe Interior" class="about-img">
+                </div>
+                <div class="about-text reveal-text">
+                    <p>Founded in the vibrant heart of Dubai Design District, Caffeine & Culture is an ode to the artisanal spirit. We believe that coffee is not just a beverage, but a language of creativity and connection.</p>
+                    <p>Our space is designed as a sanctuary for the modern mind—blending the tactile luxury of Aesop's aesthetics with the minimalist functionality of high-end tech hubs. Every cup is a curated experience, every corner a frame for inspiration.</p>
+                    <a href="#signature" class="btn hover-trigger">Discover Our Blend</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signature Coffee Section -->
+    <section id="signature">
+        <div class="container">
+            <span class="section-subtitle reveal-text">The Collection</span>
+            <h2 class="section-title reveal-text">Signature Brews</h2>
+            
+            <div class="coffee-grid">
+                <!-- Card 1 -->
+                <div class="coffee-card hover-trigger tilt-card">
+                    <div class="coffee-img-wrap">
+                        <img src="https://picsum.photos/seed/spanish-latte/600/800" alt="Spanish Latte">
+                    </div>
+                    <div class="coffee-info">
+                        <h3>Spanish Latte</h3>
+                        <p>Espresso, condensed milk, velvet foam</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="coffee-card hover-trigger tilt-card">
+                    <div class="coffee-img-wrap">
+                        <img src="https://picsum.photos/seed/matcha-latte/600/800" alt="Matcha Latte">
+                    </div>
+                    <div class="coffee-info">
+                        <h3>Ceremonial Matcha</h3>
+                        <p>Grade A matcha, oat milk, hints of vanilla</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="coffee-card hover-trigger tilt-card">
+                    <div class="coffee-img-wrap">
+                        <img src="https://picsum.photos/seed/cold-brew/600/800" alt="Cold Brew">
+                    </div>
+                    <div class="coffee-info">
+                        <h3>Nitro Cold Brew</h3>
+                        <p>24-hour steep, infused with nitrogen</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="coffee-card hover-trigger tilt-card">
+                    <div class="coffee-img-wrap">
+                        <img src="https://picsum.photos/seed/saffron-coffee/600/800" alt="Saffron Latte">
+                    </div>
+                    <div class="coffee-info">
+                        <h3>Royal Saffron Latte</h3>
+                        <p>House-infused saffron milk, double espresso</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Menu -->
+    <section id="menu">
+        <div class="container">
+            <div style="text-align: center;">
+                <span class="section-subtitle reveal-text">Culinary Art</span>
+                <h2 class="section-title reveal-text">Curated Menu</h2>
+            </div>
+
+            <div class="menu-categories reveal-text">
+                <button class="menu-cat-btn active hover-trigger" data-filter="all">All</button>
+                <button class="menu-cat-btn hover-trigger" data-filter="breakfast">Breakfast</button>
+                <button class="menu-cat-btn hover-trigger" data-filter="brunch">Brunch</button>
+                <button class="menu-cat-btn hover-trigger" data-filter="desserts">Desserts</button>
+            </div>
+
+            <div class="menu-grid" id="menu-grid">
+                <!-- Items injected via JS -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn hover-trigger">Download Full Menu</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Roastery Experience -->
+    <section id="roastery">
+        <div class="container">
+            <span class="section-subtitle reveal-text">The Process</span>
+            <h2 class="section-title reveal-text">Crafted From Bean To Cup</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>01. Direct Sourcing</h3>
+                        <p>We travel to Ethiopia, Colombia, and Sumatra to build relationships with farmers.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>02. Hand Selection</h3>
+                        <p>Every bean is hand-sorted to ensure defect-free batches of green coffee.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>03. Artisan Roasting</h3>
+                        <p>Small-batch roasting in Dubai, profiling for maximum flavor complexity.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>04. Precision Brewing</h3>
+                        <p>Our baristas use scientific methods to extract the perfect cup every time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery">
+        <div class="container">
+            <h2 class="section-title reveal-text" style="margin-bottom: 3rem;">The Gallery</h2>
+            <div class="gallery-masonry">
+                <div class="gallery-item reveal-img hover-trigger">
+                    <img src="https://picsum.photos/seed/cafe-interior1/500/700" alt="Interior">
+                    <div class="gallery-overlay"><i class="fab fa-instagram"></i></div>
+                </div>
+                <div class="gallery-item reveal-img hover-trigger">
+                    <img src="https://picsum.photos/seed/coffee-pour/500/500" alt="Pour Over">
+                    <div class="gallery-overlay"><i class="fab fa-instagram"></i></div>
+                </div>
+                <div class="gallery-item reveal-img hover-trigger">
+                    <img src="https://picsum.photos/seed/latte-art/500/600" alt="Latte Art">
+                    <div class="gallery-overlay"><i class="fab fa-instagram"></i></div>
+                </div>
+                <div class="gallery-item reveal-img hover-trigger">
+                    <img src="https://picsum.photos/seed/dessert-plate/500/400" alt="Desserts">
+                    <div class="gallery-overlay"><i class="fab fa-instagram"></i></div>
+                </div>
+                <div class="gallery-item reveal-img hover-trigger">
+                    <img src="https://picsum.photos/seed/person-laptop/500/650" alt="Lifestyle">
+                    <div class="gallery-overlay"><i class="fab fa-instagram"></i></div>
+                </div>
+                <div class="gallery-item reveal-img hover-trigger">
+                    <img src="https://picsum.photos/seed/coffee-beans/500/500" alt="Beans">
+                    <div class="gallery-overlay"><i class="fab fa-instagram"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title reveal-text">Connoisseur Reviews</h2>
+            <div class="testimonial-slider reveal-text">
+                <div class="test-card hover-trigger">
+                    <div class="stars">★★★★★</div>
+                    <p class="test-text">"The best Spanish Latte I've had in Dubai. The atmosphere is perfect for working or deep conversation. Truly a luxury experience."</p>
+                    <p class="test-author">— Sarah J.</p>
+                </div>
+                <div class="test-card hover-trigger">
+                    <div class="stars">★★★★★</div>
+                    <p class="test-text">"Design District's hidden gem. The attention to detail in both their coffee and interior design is impeccable."</p>
+                    <p class="test-author">— Ahmed M.</p>
+                </div>
+                <div class="test-card hover-trigger">
+                    <div class="stars">★★★★★</div>
+                    <p class="test-text">"Aesop vibes meets top-tier coffee. I come here every morning for my V60. The staff knows coffee inside out."</p>
+                    <p class="test-author">— Elena R.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Info -->
+    <section id="location">
+        <div class="loc-wrapper">
+            <div class="map-container">
+                <!-- Placeholder Map using Image for Simulation -->
+                <img src="https://picsum.photos/seed/d3-map-dubai/800/800" style="width:100%; height:100%; object-fit: cover;" alt="Map Location">
+            </div>
+            <div class="loc-info reveal-text">
+                <span class="section-subtitle">Visit Us</span>
+                <h2 class="section-title">Dubai Design District</h2>
+                <br>
+                <div class="info-item">
+                    <h5>Address</h5>
+                    <p>Building 4, D3, Dubai, UAE</p>
+                </div>
+                <div class="info-item">
+                    <h5>Hours</h5>
+                    <p>Daily: 8:00 AM – 11:00 PM</p>
+                </div>
+                <div class="info-item">
+                    <h5>Contact</h5>
+                    <p>+971 50 959 9580</p>
+                    <p>hello@caffeineandculture.ae</p>
+                </div>
+                <div class="socials">
+                    <a href="#" class="hover-trigger"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="hover-trigger"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover-trigger"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation -->
+    <section id="reservation">
+        <div class="container">
+            <div class="form-box reveal-text">
+                <h2 class="section-title" style="font-size: 2rem; text-align: center; margin-bottom: 2rem;">Reserve Your Experience</h2>
+                <form id="booking-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Phone" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Email Address" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <select class="form-control" style="color: #999;">
+                                <option>Guests</option>
+                                <option>1 Person</option>
+                                <option>2 People</option>
+                                <option>3 People</option>
+                                <option>4+ People</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="time" class="form-control" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary hover-trigger" style="width: 100%; margin-top: 1rem;">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">C<span>&</span>C</div>
+                    <p class="footer-desc">A specialty coffee destination in the heart of Dubai Design District. Crafted for creators, dreamers, and coffee lovers.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#" class="hover-trigger">Our Story</a></li>
+                        <li><a href="#" class="hover-trigger">Wholesale</a></li>
+                        <li><a href="#" class="hover-trigger">Careers</a></li>
+                        <li><a href="#" class="hover-trigger">Press</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#" class="hover-trigger">Privacy Policy</a></li>
+                        <li><a href="#" class="hover-trigger">Terms of Service</a></li>
+                        <li><a href="#" class="hover-trigger">Accessibility</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p class="footer-desc" style="margin-bottom: 1rem;">Join our culture club for updates.</p>
+                    <form class="newsletter-form" onsubmit="event.preventDefault();">
+                        <input type="email" placeholder="Your Email">
+                        <button type="submit" class="hover-trigger">JOIN</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Caffeine & Culture Cafe. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.29/dist/lenis.min.js"></script>
+
+    <script>
+        // --- MENU DATA ---
+        const menuItems = [
+            { name: "Avocado Toast Royale", cat: "breakfast", price: "AED 65", desc: "Sourdough, poached eggs, micro-greens" },
+            { name: "Shakshuka D3", cat: "breakfast", price: "AED 55", desc: "Spicy tomato sauce, feta, crusty bread" },
+            { name: "Truffle Eggs Benedict", cat: "brunch", price: "AED 75", desc: "English muffin, truffle hollandaise" },
+            { name: "Quinoa Salad Bowl", cat: "brunch", price: "AED 60", desc: "Roasted veggies, lemon tahini dressing" },
+            { name: "Basque Cheesecake", cat: "desserts", price: "AED 45", desc: "Burnt top, creamy center" },
+            { name: "Tiramisu", cat: "desserts", price: "AED 40", desc: "Espresso soaked ladyfingers" },
+        ];
+
+        // Render Menu
+        const menuGrid = document.getElementById('menu-grid');
+        function renderMenu(filter = 'all') {
+            menuGrid.innerHTML = '';
+            menuItems.forEach(item => {
+                if (filter === 'all' || item.cat === filter) {
+                    const div = document.createElement('div');
+                    div.className = 'menu-item reveal-text';
+                    div.innerHTML = `
+                        <div class="menu-item-details">
+                            <h4>${item.name}</h4>
+                            <p>${item.desc}</p>
+                        </div>
+                        <div class="menu-price">${item.price}</div>
+                    `;
+                    menuGrid.appendChild(div);
+                }
+            });
+        }
+        renderMenu();
+
+        // Menu Filter Logic
+        const filterBtns = document.querySelectorAll('.menu-cat-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderMenu(btn.dataset.filter);
+                // Refresh scrolltrigger for new elements
+                setTimeout(() => ScrollTrigger.refresh(), 100);
+            });
+        });
+
+        // --- SMOOTH SCROLL (LENIS) ---
+        const lenis = new Lenis({
+            duration: 1.2,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            smooth: true
+        });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // Link Lenis to GSAP
+        gsap.registerPlugin(ScrollTrigger);
+
+        // --- CUSTOM CURSOR ---
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        window.addEventListener('mousemove', (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+
+            // Adding delay for outline via animation frame or simple transition
+            cursorOutline.animate({
+                left: `${posX}px`,
+                top: `${posY}px`
+            }, { duration: 500, fill: "forwards" });
+        });
+
+        // Hover effect scaling
+        document.querySelectorAll('.hover-trigger').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursorOutline.classList.add('hovered');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorOutline.classList.remove('hovered');
+            });
+        });
+
+        // --- CANVAS PARTICLES (Coffee Beans) ---
+        const canvas = document.getElementById('beans-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Bean {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.size = Math.random() * 3 + 1;
+                this.speedY = Math.random() * 0.5 + 0.1;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+            update() {
+                this.y += this.speedY;
+                if (this.y > height) this.y = 0;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(212, 165, 116, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for(let i=0; i<50; i++) particles.push(new Bean());
+
+        function animateBeans() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateBeans);
+        }
+        animateBeans();
+
+        // --- GSAP ANIMATIONS ---
+
+        // 1. Hero Reveal
+        const heroTl = gsap.timeline();
+        heroTl.to('.hero-title', { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.5 })
+              .to('.hero-sub', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.7')
+              .to('.hero-actions', { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.7');
+
+        // 2. Hero Parallax
+        gsap.to('#parallax-bg', {
+            yPercent: 30,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#hero",
+                start: "top top",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+
+        // 3. Scroll Reveal Utility
+        const revealElements = document.querySelectorAll('.reveal-text');
+        revealElements.forEach(el => {
+            gsap.fromTo(el, 
+                { opacity: 0, y: 50 },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+
+        const revealImages = document.querySelectorAll('.reveal-img');
+        revealImages.forEach(el => {
+            gsap.fromTo(el, 
+                { opacity: 0, scale: 0.95 },
+                {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 1.2,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: "top 85%",
+                    }
+                }
+            );
+        });
+
+        // 4. Timeline Animation
+        gsap.utils.toArray('.timeline-item').forEach(item => {
+            ScrollTrigger.create({
+                trigger: item,
+                start: "top 70%",
+                onEnter: () => item.classList.add('active'),
+                onLeaveBack: () => item.classList.remove('active')
+            });
+        });
+
+        // 5. Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // --- 3D TILT EFFECT ---
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = ((y - centerY) / centerY) * -5; // Max 5 deg
+                const rotateY = ((x - centerX) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+
+        // --- MOBILE MENU ---
+        const toggleBtn = document.getElementById('mobile-toggle');
+        const navUl = document.getElementById('nav-links');
+
+        toggleBtn.addEventListener('click', () => {
+            navUl.classList.toggle('active');
+            toggleBtn.querySelector('i').classList.toggle('fa-bars');
+            toggleBtn.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close menu on link click
+        navUl.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navUl.classList.remove('active');
+                toggleBtn.querySelector('i').classList.add('fa-bars');
+                toggleBtn.querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // --- FORM HANDLING ---
+        const form = document.getElementById('booking-form');
+        const toast = document.getElementById('toast');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Simulate API call
+            const btn = form.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Processing...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.disabled = false;
+                form.reset();
+                showToast();
+            }, 1500);
+        });
+
+        function showToast() {
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+    </script>
+</body>
+</html>
